@@ -50,7 +50,7 @@ class CitiesTabs extends React.Component<
                 className={`${
                   selected === city
                     ? "text-highlight font-bold"
-                    : "font-extralight"
+                    : "font-light"
                 } uppercase text-2xl   cursor-pointer`}
               >
                 {city}
