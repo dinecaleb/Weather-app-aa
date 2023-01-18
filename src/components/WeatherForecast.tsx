@@ -1,6 +1,7 @@
+import { format } from "date-fns";
 import React from "react";
 import { WeatherDay } from "../api/weather.model";
-import { ToLocalDate } from "../utils/weather";
+
 
 interface WeatherForecastProps {
   days: WeatherDay[];
@@ -21,11 +22,8 @@ class WeatherForecast extends React.Component<WeatherForecastProps, {}> {
         {days && (
           <div className="border-t-4  border-white grid grid-cols-4  ">
             {days.slice(1, 5).map((item, index) => {
-              const date = ToLocalDate(item.datetimeEpoch);
-              const dayOfWeek = date.toLocaleDateString("en-US", {
-                weekday: "short",
-              });
-
+              
+              const dayOfWeek = format(new Date(item.datetime?.replace(/-/g, '\/')), 'EEE');
               const icon = images(`./${item.icon}.png`);
               const temp = Math.round(item.temp) + "º";
 
