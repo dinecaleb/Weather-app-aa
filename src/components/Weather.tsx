@@ -51,7 +51,7 @@ class Weather extends React.Component<{}, WeatherProps> {
                   <img
                     alt="weatherIcon"
                     src={todayIcon}
-                    className="m-auto -mt-5 h-[100px]"
+                    className="m-auto -mt-5 h-[120px]"
                   />
                 </div>
                 <div className="text-left pl-5 w-[60%]">
