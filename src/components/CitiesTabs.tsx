@@ -7,7 +7,7 @@ interface CitiesTabsStateProps {
 }
 
 interface CitiesTabsProps {
-  setDays: (days: WeatherDay[]) => void;
+  setDays: (days: WeatherDay[],currentConditions:WeatherDay) => void;
   setLoading: (loading: boolean) => void;
 }
 
@@ -30,7 +30,8 @@ class CitiesTabs extends React.Component<
     this.setState({ selected: city });
     const cityData = await fetchWeatherByCity(city);
     const days = cityData?.days;
-    this.props.setDays(days);
+    const currentConditions = cityData?.currentConditions;
+    this.props.setDays(days,currentConditions);
     this.props.setLoading(false);
   };
 

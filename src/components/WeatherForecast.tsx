@@ -25,8 +25,7 @@ class WeatherForecast extends React.Component<WeatherForecastProps, {}> {
               
               const dayOfWeek = format(new Date(item.datetime?.replace(/-/g, '\/')), 'EEE');
               const icon = images(`./${item.icon}.png`);
-              const temp = Math.round(item.temp) + "º";
-
+              const temp =  item ? item.temp > 0 ?Math.round(item?.temp)+ "º":Math.floor(item?.temp)+ "º" : "";
               return (
                 <div
                   className={

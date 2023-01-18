@@ -8,20 +8,21 @@ interface WeatherProps {
   days: WeatherDay[];
   loading: boolean;
   mounted: boolean;
+  currentConditions:object
 }
 const images = require.context("../assets/icons", true);
 
 class Weather extends React.Component<{}, WeatherProps> {
   constructor(props: any) {
     super(props);
-    this.state = { days: [], loading: false, mounted: false };
+    this.state = { days: [], loading: false, mounted: false, currentConditions:{} };
   }
   componentDidMount() {
     this.setState({ mounted: true });
   }
 
-  setDays = (days: WeatherDay[]) => {
-    this.setState({ days: days });
+  setDays = (days: WeatherDay[],currentConditions:WeatherDay) => {
+    this.setState({ days: days,currentConditions:currentConditions });
   };
 
   setLoading = (loading: boolean) => {
@@ -29,11 +30,11 @@ class Weather extends React.Component<{}, WeatherProps> {
   };
 
   render() {
-    const { days, loading } = this.state;
-    const hasData = days.length > 0;
-    const today = hasData ? days[0] : null;
+    const { currentConditions, loading } = this.state;
+    const hasData = Object.keys(currentConditions).length > 0;
+    const today = hasData && currentConditions as WeatherDay;
     const todayIcon = today ? images(`./${today?.icon}.png`) : null;
-    const todayTemp = today ? Math.round(today?.temp) + "º" : "";
+    const todayTemp = today ? today.temp > 0 ?Math.round(today?.temp)+ "º":Math.floor(today?.temp) + "º": "";
     const todayCondition = today ? today?.conditions : "";
 
     return (
